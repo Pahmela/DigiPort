@@ -89,9 +89,9 @@ console.log("");
 
 
 /* 4. Medalha
-Se tempo <= 1min -> Ouro;
-Se 1min < tempo <= 2min -> Prata;
-Se tempo > 2min -> n-> Bronze.
+Se tempo < 1min -> Ouro;
+Se 1min < tempo < 2min -> Prata;
+Se tempo >= 2min -> n-> Bronze.
 */
 
 function medalha(tempo) {
@@ -105,14 +105,14 @@ function medalha(tempo) {
     //     console.log("4. Tempo informado invalido")
     // }
 
-    switch (tempo) {
+    switch (true) {
         case (tempo < 1):
             console.log("4. Parabens, medalha de ouro!")
             break;
         case (tempo < 2):
             console.log("4. Parabens, medalha de prata!")
             break;
-        case (tempo > 2):
+        case (tempo >= 2):
             console.log("4. Parabens, medalha de bronze")
             break;
         default:
@@ -227,7 +227,7 @@ function estacao(ordem) {
             console.log("7. Inverno")
             break;
         default:
-            console.log("7. Numero indicado invalido")
+            console.log("7. Numero informado invalido")
             break;
     }
 }

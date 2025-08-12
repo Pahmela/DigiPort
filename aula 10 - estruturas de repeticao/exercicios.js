@@ -33,7 +33,7 @@ for (const par of pares) {
 }
 
 // 2.1 Loop 
-for (i = 1; i <= 10; i++) {
+for (let i = 1; i <= 10; i++) {
     if ((i % 3) === 0) {
         console.log(`2.1 O recheio do ${i}o donout eh chocolate`)
     } else {

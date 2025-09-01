@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #9b9ff1;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      button {
+        margin: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        background-color: rgba(104, 104, 246, 0.8);
+        margin: 5px;
+        padding: 8px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <h1>Welcome to The Shakin' Diner</h1>
+    <div id="buttonsContainer" style="background: #cfc0fc; border-radius: 10px; box-shadow: 0 2px 8px rgba(104,104,246,0.15); padding: 20px; margin: 0 auto 20px auto; max-width: 500px; display: flex; flex-direction: column; gap: 10px;">
+      <h2 style="margin-top: 0;">Menu</h2>
+      <div id="menuButtons"></div>
+    </div>
+    <style>
+      #buttonsContainer button {
+      background-color: #f9f4fc;
+      color: #7878e1;
+      border: 2px solid #f9f4fc;
+      border-radius: 5px;
+      transition: background 0.2s, color 0.2s;
+      }
+      #buttonsContainer button:hover {
+      background-color: #6868f6;
+      color: #fff;
+      }
+    </style>
+    <button id="discount10">Apply 10% Discount</button>
+    <button id="resetCart">Reset Cart</button>
+
+    <h2>Products:</h2>
+    <ul id="productList"></ul>
+    <p><strong>Total:</strong> $<span id="total"></span></p>
+
+    <script src="script.js"></script>
+    <script>
+      const products = [
+        ["Cheeseburguer", 12],
+        ["Double Burguer", 15],
+        ["Veggie Burguer", 10],
+        ["Fries", 7],
+        ["Onion Rings", 6],
+        ["Chocolate Milkshake", 8],
+        ["Strawberry Milkshake", 8],
+        ["Vanilla Milkshake", 8],
+        ["Ice Cream", 3],
+      ];
+      const productList = document.getElementById("productList");
+      const totalSpan = document.getElementById("total");
+      const menuButtons = document.getElementById("menuButtons");
+
+      let myCart = new Cart();
+
+      products.forEach(([name, price]) => {
+        const btn = document.createElement("button");
+        btn.innerText = `Add ${name} ($${price})`;
+        btn.onclick = () => {
+          myCart.add(new Product(name, price));
+          updateDisplay();
+        };
+        menuButtons.appendChild(btn);
+      });
+
+      document.getElementById("discount10").onclick = () => {
+        myCart.applyDiscount();
+        updateDisplay();
+      };
+
+      document.getElementById("resetCart").onclick = () => {
+        myCart = new Cart();
+        updateDisplay();
+      };
+
+      function updateDisplay() {
+        productList.innerHTML = myCart
+          .showProducts()
+          .split("\n")
+          .map((desc) => `<li>${desc}</li>`)
+          .join("");
+        totalSpan.innerText = myCart.total();
+      }
+
+      updateDisplay();
+    </script>
+  </body>
+</html>
